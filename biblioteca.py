@@ -1,10 +1,53 @@
 def carica_da_file(file_path):
     """Carica i libri dal file"""
-    # TODO
-
+    try:
+        biblioteca= list()
+        lista1 = list()
+        lista2 = list()
+        lista3 = list()
+        lista4 = list()
+        lista5 = list()
+        with open(file_path, 'r', encoding='utf-8') as f:
+            f.readline()
+            for line in f:
+                campi = line.strip('\n').split(',')
+                titolo = campi[0]
+                autore = campi[1]
+                anno = campi[2]
+                pagine = campi[3]
+                sezione = int(campi[4])
+                libro = {      'titolo' : titolo,
+                               'autore' : autore,
+                                'anno' : anno,
+                                'pagine' : pagine,
+                                'sezione' : sezione}
+                #if libro not in lista:
+                    #lista.append(libro)
+                if sezione == 1:
+                    lista1.append(libro)
+                elif sezione ==2:
+                    lista2.append(libro)
+                elif sezione == 3:
+                    lista3.append(libro)
+                elif sezione == 4:
+                    lista4.append(libro)
+                else:
+                    lista5.append(libro)
+            biblioteca = [lista1, lista2, lista3, lista4, lista5]
+        return biblioteca
+    except OSError:
+        print('None')
 
 def aggiungi_libro(biblioteca, titolo, autore, anno, pagine, sezione, file_path):
     """Aggiunge un libro nella biblioteca"""
+    with open(file_path, 'a', encoding='utf-8') as f:
+        for line in f:
+            campi = line.strip('\n').split(',')
+            if titolo  == campi[0] or
+                print('None')
+
+
+
     # TODO
 
 
