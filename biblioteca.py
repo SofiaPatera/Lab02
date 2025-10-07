@@ -40,26 +40,49 @@ def carica_da_file(file_path):
 
 def aggiungi_libro(biblioteca, titolo, autore, anno, pagine, sezione, file_path):
     """Aggiunge un libro nella biblioteca"""
-    with open(file_path, 'a', encoding='utf-8') as f:
-        for line in f:
-            campi = line.strip('\n').split(',')
-            if titolo  == campi[0] or
-                print('None')
-
-
-
-    # TODO
-
+    try:
+        #controllo che la sezione esiste
+        if sezione<1 or sezione >len(biblioteca):
+            return None
+        for sezioni in biblioteca:
+            for libro in sezioni:
+                if libro['titolo'].lower ==titolo.lower():
+                    return None
+        libro_inserito = { 'titolo' : titolo,
+                           'autore' : autore,
+                           'anno' : anno,
+                           'pagine' : pagine,
+                           'sezione' : sezione,}
+        biblioteca[sezione-1].append(libro_inserito)
+        with open(file_path, 'a', encoding='utf-8') as f:
+            f.write(f'{titolo}, {autore}, {anno}, {pagine}, {sezione}\n')
+        return libro_inserito
+    except OSError:
+        return None
 
 def cerca_libro(biblioteca, titolo):
     """Cerca un libro nella biblioteca dato il titolo"""
-    # TODO
-
+    try:
+        for sezioni in biblioteca:
+            for libro in sezioni:
+                if libro['titolo'].lower() == titolo.lower():
+                    return(f'{libro["titolo"]}, {libro["autore"]}, {libro["anno"]}, {libro["pagine"]}, {libro["sezione"]}')
+        return None
+    except OSError:
+        return None
 
 def elenco_libri_sezione_per_titolo(biblioteca, sezione):
     """Ordina i titoli di una data sezione della biblioteca in ordine alfabetico"""
-    # TODO
-
+    try:
+        if sezione<1 or sezione >len(biblioteca):
+            return None
+        titoli = list()
+        for libro in biblioteca[sezione-1]:
+            titoli.append(libro['titolo'])
+        titoli.sort()
+        return titoli
+    except IndexError:
+        return None
 
 def main():
     biblioteca = []
